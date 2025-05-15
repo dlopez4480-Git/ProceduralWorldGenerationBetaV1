@@ -1,0 +1,22 @@
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\bin\Debug\net8.0\ProGenAAG Project.exe
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\bin\Debug\net8.0\ProGenAAG Project.deps.json
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\bin\Debug\net8.0\ProGenAAG Project.runtimeconfig.json
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\bin\Debug\net8.0\ProGenAAG Project.dll
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\bin\Debug\net8.0\ProGenAAG Project.pdb
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\bin\Debug\net8.0\LibNoise.dll
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\bin\Debug\net8.0\System.Drawing.Common.dll
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\bin\Debug\net8.0\System.Private.Windows.Core.dll
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\obj\Debug\net8.0\ProGenAAG Project.csproj.AssemblyReference.cache
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\obj\Debug\net8.0\ProGenAAG Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\obj\Debug\net8.0\ProGenAAG Project.AssemblyInfoInputs.cache
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\obj\Debug\net8.0\ProGenAAG Project.AssemblyInfo.cs
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\obj\Debug\net8.0\ProGenAAG Project.csproj.CoreCompileInputs.cache
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\obj\Debug\net8.0\ProGenAA.A2E72095.Up2Date
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\obj\Debug\net8.0\ProGenAAG Project.dll
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\obj\Debug\net8.0\refint\ProGenAAG Project.dll
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\obj\Debug\net8.0\ProGenAAG Project.pdb
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\obj\Debug\net8.0\ProGenAAG Project.genruntimeconfig.cache
+C:\Users\David Lopez\source\repos\ProGenAAG Project\ProGenAAG Project\obj\Debug\net8.0\ref\ProGenAAG Project.dll

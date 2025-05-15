@@ -1,0 +1,280 @@
+﻿//  SECTION:    River Generation
+            //  Generate Rivers Map
+            //  TODO
+        static List<Coords> RiverPathfind(int[,] elevationMap, Coords start, Coords end)
+        {
+            int rows = elevationMap.GetLength(0);
+            int cols = elevationMap.GetLength(1);
+            bool[,] visited = new bool[rows, cols];
+            Queue<List<Coords>> queue = new Queue<List<Coords>>();
+            queue.Enqueue(new List<Coords> { start });
+
+            while (queue.Count > 0)
+            {
+                List<Coords> path = queue.Dequeue();
+                Coords current = path[^1];
+
+                if (current.xCoord == end.xCoord && current.yCoord == end.yCoord)
+                    return path;
+
+                int elevation = elevationMap[current.xCoord, current.yCoord];
+                Coords[] directions = { new Coords(0, 1), new Coords(1, 0), new Coords(0, -1), new Coords(-1, 0) };
+
+                foreach (var dir in directions)
+                {
+                    int newX = current.xCoord + dir.xCoord;
+                    int newY = current.yCoord + dir.yCoord;
+
+                    if (newX >= 0 && newX < rows && newY >= 0 && newY < cols &&
+                        !visited[newX, newY] && elevationMap[newX, newY] <= elevation)
+                    {
+                        visited[newX, newY] = true;
+                        List<Coords> newPath = new List<Coords>(path) { new Coords(newX, newY) };
+                        queue.Enqueue(newPath);
+                    }
+                }
+            }
+            return new List<Coords>(); // No path found
+        }
+
+        
+
+        public static void adjustRiverTurns(int[,] riversMaps, List<Coords> riverPath)
+        {
+            string[] shapes = new string[riverPath.Count];
+
+            for (int i = 0; i < riverPath.Count; i++)
+            {
+                Coords current = riverPath[i];
+                bool hasNorth = riverPath.Contains(new Coords(current.xCoord, current.yCoord + 1));
+                bool hasEast = riverPath.Contains(new Coords(current.xCoord + 1, current.yCoord));
+                bool hasSouth = riverPath.Contains(new Coords(current.xCoord, current.yCoord - 1));
+                bool hasWest = riverPath.Contains(new Coords(current.xCoord - 1, current.yCoord));
+
+
+                        //public static readonly int riverForm_poolNorth = 11;
+                        //public static readonly int riverForm_poolEast = 12;
+                        //public static readonly int riverForm_poolSouth = 13;
+                        //public static readonly int riverForm_poolWest = 14;
+
+
+
+                if (i == 0)
+                {
+                    if (hasNorth) 
+                    {
+                        riversMaps[current.xCoord, current.yCoord] = riverForm_poolNorth;
+                        shapes[i] = "Pool_North"; 
+                    }
+                    else if (hasEast) 
+                    {
+                        riversMaps[current.xCoord, current.yCoord] = riverForm_poolEast;
+                        shapes[i] = "Pool_East"; 
+                    }
+                    else if (hasSouth) 
+                    {
+                        riversMaps[current.xCoord, current.yCoord] = riverForm_poolSouth;
+                        shapes[i] = "Pool_South"; 
+                    }
+                    else if (hasWest) 
+                    {
+                        riversMaps[current.xCoord, current.yCoord] = riverForm_poolWest;
+                        shapes[i] = "Pool_West";
+                    }
+                }
+                else if (i == riverPath.Count - 1)
+                {
+                    if (hasNorth) 
+                    {
+                        riversMaps[current.xCoord, current.yCoord] = riverForm_poolNorth;
+                        shapes[i] = "Pool_North"; 
+                    }
+                    else if (hasEast) 
+                    {
+                        riversMaps[current.xCoord, current.yCoord] = riverForm_poolEast;
+                        shapes[i] = "Pool_East"; 
+                    }
+                    else if (hasSouth) 
+                    {
+                        riversMaps[current.xCoord, current.yCoord] = riverForm_poolSouth;
+                        shapes[i] = "Pool_South"; 
+                    }
+                    else if (hasWest) 
+                    {
+                        riversMaps[current.xCoord, current.yCoord] = riverForm_poolWest;
+                        shapes[i] = "Pool_West"; 
+                    }
+                }
+                else if (hasNorth && hasSouth) 
+                {
+                    riversMaps[current.xCoord, current.yCoord] = riverForm_straightNS;
+                    shapes[i] = "Straight_NorthSouth"; 
+                }
+                else if (hasEast && hasWest) 
+                {
+                    riversMaps[current.xCoord, current.yCoord] = riverForm_straightEW;
+                    shapes[i] = "Straight_EastWest"; 
+                }
+                else if (hasNorth && hasEast) 
+                {
+                    riversMaps[current.xCoord, current.yCoord] = riverForm_LjointNE;
+                    shapes[i] = "LJoint_NorthEast"; 
+                }
+                else if (hasNorth && hasWest) 
+                {
+                    riversMaps[current.xCoord, current.yCoord] = riverForm_LjointNW;
+                    shapes[i] = "LJoint_NorthWest"; 
+                }
+                else if (hasSouth && hasEast) 
+                {
+                    riversMaps[current.xCoord, current.yCoord] = riverForm_LjointSE;
+                    shapes[i] = "LJoint_SouthEast"; 
+                }
+                else if (hasSouth && hasWest) 
+                {
+                    riversMaps[current.xCoord, current.yCoord] = riverForm_LjointSW;
+                    shapes[i] = "LJoint_SouthWest"; 
+                }
+            }
+
+            
+        }
+
+        public static int[,] generateRiversMap(int[] mapArgs, int[,] elevationMap) {
+            int size = mapArgs[argIndex_arraysize];
+            int sealevel = mapArgs[argIndex_sealevel];
+            int[,] riversMap = new int[size, size];
+            bool debug = true;
+            int riverLengthModifier = 1;
+
+
+
+            //  Create a list of lands
+            List<List<Coords>> landmassMaps = GeneralUtil.FindIslandsInRange(elevationMap, sealevel, 64, false, false);
+
+
+
+            //  Intialize the rivers array
+            for (int r = 0; r < size; r++) {
+                for (int c = 0; c < size; c++) {
+
+                    if (elevationMap[r,c] < sealevel)
+                    {
+                        riversMap[r, c] = riverForm_water;
+                    } else
+                    {
+                        riversMap[r, c] = riverForm_noRiver;
+                    }
+
+                    
+                }
+            }
+
+            
+            //  On each isolated landmass of signficiant size, create a random amount of rivers
+            foreach (List<Coords> landTiles in landmassMaps) {
+                //  Generate how many rivers per isolated landmass
+                int numRivers = random.Next(0, size / 4);
+                numRivers = 2;
+                //  if the landmass is too small, do not generate rivers
+                if (landTiles.Count < size*2)
+                {
+                    numRivers = 0;
+                }
+                
+
+
+                for (int rivercount = 0; rivercount < numRivers; rivercount++) {
+                    reloopRiverGen:
+                    
+                    //  Get the two different riverCounts
+                    Coords riverend1 = landTiles[random.Next(0,landTiles.Count)];
+                    Coords riverend2 = landTiles[random.Next(0, landTiles.Count)];
+                    
+
+
+
+
+
+
+
+                    if (riverend1.xCoord == riverend2.xCoord && riverend1.yCoord == riverend2.yCoord) {
+                        if (debug) { Console.WriteLine("RIVER ENDS IDENTICAL: RELOOPING"); }
+                        goto reloopRiverGen;
+
+                    }
+                    
+                    //riversMap[riverend1.xCoord, riverend1.yCoord] = riverID_1111;
+                    //riversMap[riverend2.xCoord, riverend2.yCoord] = riverID_1111;
+
+                    //  Get the coords alongside the path between the points
+                    List<Coords> riverTilesList = RiverPathfind(elevationMap, riverend1, riverend2);
+
+
+                    //  Verify that there are no other rivers around
+                    foreach (Coords riverTile in riverTilesList)
+                    {
+                        List<Coords> circleCoords = GeneralUtil.GetCoordsWithinCircle(riversMap, riverTile, 2);
+                        foreach (Coords circleCoord in circleCoords)
+                        {
+                            if (riversMap[circleCoord.xCoord, circleCoord.yCoord] == riverForm_noRiver)
+                            {
+                                if (debug) { Console.WriteLine("River too close to other river: regenerating"); }
+                                //goto reloopRiverGen;
+                            }
+                        }
+                    }
+
+
+                    //  Verify the length of river is valid
+                    if (riverTilesList.Count() < (size / riverLengthModifier)) {
+                        if (debug) { Console.WriteLine("River too short: regenerating"); }
+                        goto reloopRiverGen;
+                    } 
+
+                    else if (riverTilesList.Count() >= (size / riverLengthModifier))
+                    {
+                        if (debug) { Console.WriteLine("River length " + riverTilesList.Count() + " accepted"); }
+                    }
+
+                    
+                    
+
+
+
+
+
+
+
+
+                    //Set the value along each path to a river value
+                    foreach (Coords riveredTile in riverTilesList) {
+                        if (debug)
+                        {
+                            Console.WriteLine(riveredTile.ToString);
+                        }
+
+                        riversMap[riveredTile.xCoord, riveredTile.yCoord] = riverForm_riverGeneric;
+                    }
+
+                    if (riverTilesList.Count > 0) {
+                        riversMap[riverend1.xCoord, riverend1.yCoord] = riverForm_riverGeneric;
+                        riversMap[riverend2.xCoord, riverend2.yCoord] = riverForm_riverGeneric;
+                    }
+
+                    //AdjustBorders(riversMap, riverTilesList);
+
+                    adjustRiverTurns(riversMap, riverTilesList);
+
+
+
+                }
+
+            }
+
+            
+
+            return riversMap;
+
+
+        }

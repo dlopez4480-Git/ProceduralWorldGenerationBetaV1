@@ -1,0 +1,86 @@
+﻿        public static readonly int riverID_0001             = 1;    //  West Bordered
+        public static readonly int riverID_0010             = 2;    //  South bordered
+        public static readonly int riverID_0011             = 3;    //  West-South Bordered
+        public static readonly int riverID_0100             = 4;    //  East Bordered
+        public static readonly int riverID_0101             = 5;    //  East West Bordered
+        public static readonly int riverID_0110             = 6;    //  East-South Bordered
+        public static readonly int riverID_0111             = 7;    //  East-West-South Bordered
+        public static readonly int riverID_1000             = 8;    //  North Bordered
+        public static readonly int riverID_1001             = 9;    //  North-West Bordered
+        public static readonly int riverID_1010             = 10;   //  North-South Bordered
+        public static readonly int riverID_1011             = 11;   //  North-South-West Bordered
+        public static readonly int riverID_1100             = 12;   //  North-East Bordered
+        public static readonly int riverID_1101             = 13;   //  North-East-West Bordered
+        public static readonly int riverID_1110             = 14;   //  North-East-South Bordered
+
+
+
+        else if (riversMap[i, j] == riverID_0001)
+                    {
+                        Console.Write("|  ");
+                    }
+                    //  South bordered
+                    else if (riversMap[i, j] == riverID_0010)
+                    {
+                        Console.Write(" _ ");
+                    }
+                    //  West-South Bordered
+                    else if (riversMap[i, j] == riverID_0011)
+                    {
+                        Console.Write("|_ ");
+                    }
+                    //  East Bordered
+                    else if (riversMap[i, j] == riverID_0100)
+                    {
+                        Console.Write("  |");
+                    }
+                    //  East West Bordered
+                    else if (riversMap[i, j] == riverID_0101)
+                    {
+                        Console.Write("| |");
+                    }
+                    //  East-South Bordered
+                    else if (riversMap[i, j] == riverID_0110)
+                    {
+                        Console.Write(" _|");
+                    }
+                    //  East-West-South Bordered
+                    else if (riversMap[i, j] == riverID_0111)
+                    {
+                        Console.Write("|_|");
+                    }
+                    //  North Bordered
+                    else if (riversMap[i, j] == riverID_1000)
+                    {
+                        Console.Write(" ` ");
+                    }
+                    //  North-West Bordered
+                    else if (riversMap[i, j] == riverID_1001)
+                    {
+                        Console.Write("|` ");
+                    }
+                    //  North-South Bordered
+                    else if (riversMap[i, j] == riverID_1010)
+                    {
+                        Console.Write(" = ");
+                    }
+                    //  North-South-West Bordered
+                    else if (riversMap[i, j] == riverID_1011)
+                    {
+                        Console.Write("|= ");
+                    }
+                    //  North-East Bordered
+                    else if (riversMap[i, j] == riverID_1100)
+                    {
+                        Console.Write(" `|");
+                    }
+                    //  North-East-West Bordered
+                    else if (riversMap[i, j] == riverID_1101)
+                    {
+                        Console.Write("|`|");
+                    }
+                    //  North-East-South Bordered
+                    else if (riversMap[i, j] == riverID_1110)
+                    {
+                        Console.Write(" =|");
+                    }
